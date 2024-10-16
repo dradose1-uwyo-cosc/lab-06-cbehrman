@@ -1,12 +1,8 @@
-# Your Name Here
+# Caleb Behrman
 # UWYO COSC 1010
-# Submission Date
+# 10/16/24
 # Lab 06
-# Lab Section: 
-# Sources, people worked with, help given to: 
-# your
-# comments
-# here
+# Lab Section: 2
 
 
 random_string = """
@@ -61,40 +57,57 @@ lrslowamkcwolbcgfkfciegdwqskuazxnycqkkggzsowcmafay
 ibmkdwkqmdkjesqnjiqpijixbwjhenmsrrlpcseliiajlvcaac
 zkdenxczyooloczcaahnkehbwimvieedpdlqfafbqvxvfmvabd
 """
-random_string = random_string.replace("\n","") #remove all newline characters
-print(len(random_string)) # Print out the size for reference 
+random_string=random_string.replace("\n", "")  # Remove all newline characters
+print(len(random_string))  # Print out the size for reference 
 
-# Above is a string with 2500 characters.
-# Create a program that goes through and counts the occurrence of each character, excluding \n using a  dictionary
-# Output each letter and its corresponding occurrence in alphabetical order
-# Output which letter occurred the most 
-# Output which letter occurred the least 
-# Output what the percentage of the string each character is, again in alphabetical
-
-#Tips and trick:
-# You can iterate through strings like you would a list
-# All characters are lowercase 
-# Each letter will be PAIRED with its corresponding value 
-# That is to say, this is a great use of dictionaries
-    # You will  need to add the letter to the dictionary on first occurrence 
-    # Then increment its corresponding count 
-
-
-#Load all the elements into a dictionary
-#Will need to first declare a dictionary 
-
-# Output: each letter and its corresponding occurrence in alphabetical order
-
-print("*"*75)
+print("-"*75)
 # Output which letter occurred the most 
 
-most_occurred = ""
-least_occurred = ""
+most_occurred=""
+least_occurred=""
+
+#I changed the stars for dashes cause they look better"
 
 print(f"The letter that occurred the most is {most_occurred}")
-print("*"*75)
+print("-"*75)
 # Output which letter occurred the least 
 print(f"The letter that occurred the most is {least_occurred}")
-print("*"*75)
+print("-"*75)
 
 # Output what the percentage of the string each character is, again in alphabetical
+
+# Initialize a dictionary to count occurrences
+char_count={}
+
+# Count occurrences of each character
+for char in random_string:
+    if char in char_count:
+        char_count[char]+=1
+    else:
+        char_count[char]=1
+
+# Sort the dictionary by key (character)
+sorted_char_count=dict(sorted(char_count.items()))
+
+# Output each letter and its corresponding occurrence in alphabetical order
+print("Character occurrences:")
+for char, count in sorted_char_count.items():
+    print(f"{char}: {count}")
+
+# Find the most and least occurred characters
+most_occurred=max(sorted_char_count.items(), key=lambda item: item[1])
+least_occurred=min(sorted_char_count.items(), key=lambda item: item[1])
+
+#I dont know if we have learned lambda yet, but its like a way for it to go through and find maximum and minimum, I dont really know how to explain it correctly
+
+print("-" * 75)
+print(f"The letter that occurred the most is '{most_occurred[0]}' with {most_occurred[1]} occurrences.")
+print("-" * 75)
+print(f"The letter that occurred the least is '{least_occurred[0]}' with {least_occurred[1]} occurrences.")
+print("-" * 75)
+
+# Output the percentage of the string each character represents
+print("Character percentages:")
+for char, count in sorted_char_count.items():
+    percentage=(count / len(random_string)) * 100
+    print(f"{char}: {percentage:.2f}%")
